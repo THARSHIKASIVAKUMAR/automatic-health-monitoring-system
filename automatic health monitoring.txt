@@ -1,0 +1,15 @@
+from transformers import pipeline
+
+def summarize_text(text, max_length=150, min_length=50):
+    summarizer = pipeline("summarization", model="facebook/bart-large-cnn")  # Specify model
+    summary = summarizer(text, max_length=max_length, min_length=min_length, do_sample=False)
+    return summary[0]['summary_text']
+
+if __name__ == "__main__":
+    input_text = """Artificial Intelligence (AI) is transforming various industries, including healthcare, finance, and education. 
+    AI-driven solutions are being adopted to automate processes, improve efficiency, and provide better decision-making insights."""
+    
+    print("Original Text:")
+    print(input_text)
+    print("\nSummary:")
+    print(summarize_text(input_text))
